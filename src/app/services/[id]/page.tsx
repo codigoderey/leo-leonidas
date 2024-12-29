@@ -6,6 +6,7 @@ import { useLanguageContext } from "@/context/languageContext";
 import { useParams } from "next/navigation";
 import ServiceBanner from "@/components/ServiceBanner";
 import Container from "@/components/layout/Container";
+import Spinner from "@/components/Spinner";
 
 const ServicesPage = () => {
   const { id } = useParams();
@@ -15,6 +16,10 @@ const ServicesPage = () => {
   useEffect(() => {
     firebaseContext?.getCategoryById(String(id));
   }, [id]);
+
+  if (firebaseContext?.loadingCategories) {
+    return <Spinner />;
+  }
 
   return (
     <main>

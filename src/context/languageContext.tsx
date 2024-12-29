@@ -9,7 +9,7 @@ export const LanguageContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [language, setLanguage] = useState<string>("en");
+  const [language, setLanguage] = useState<string>("es");
 
   const setLanguageAndLocalStorage = (lang: string) => {
     setLanguage(lang);

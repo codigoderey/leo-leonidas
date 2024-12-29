@@ -6,6 +6,7 @@ import type { CategoriesType } from "@/types/categories";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
+import Spinner from "@/components/Spinner";
 
 const ServiceCategoriesHeader = () => {
 	return (
@@ -48,7 +49,6 @@ const ServicesCategoriesCard = ({
 };
 
 const ServicesCategoriesList = () => {
-  const languageContext = useLanguageContext();
 	const firebaseContext = useFirebaseContext();
 
 	useEffect(() => {
@@ -57,9 +57,7 @@ const ServicesCategoriesList = () => {
 
   if(firebaseContext?.loadingCategories){
     return (
-      <div className="py-16 text-center">
-        {languageContext?.language == "en" ? "Loading..." : "Cargando..."}
-      </div>
+      <Spinner />
     )
   }
 
