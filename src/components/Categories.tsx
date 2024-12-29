@@ -1,8 +1,12 @@
 "use client";
 
 import { useLanguageContext } from "@/context/languageContext";
+import { useFirebaseContext } from "@/context/firebaseContext";
+import { CategoriesType } from "@/types/categories";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
+import firebase from "firebase/compat/app";
 
 const CategoriesJson = [
   {
@@ -42,15 +46,6 @@ const CategoriesJson = [
   },
 ];
 
-export interface ServicesCategoriesCardProps {
-  id: number;
-  esName: string;
-  enName: string;
-  spDesc: string;
-  enDesc: string;
-  image: string;
-}
-
 const ServiceCategoriesHeader = () => {
   return <h3 className="text-3xl font-bold text-blue-200 my-8">
     {useLanguageContext()?.language === "es" ? "Servicios" : "Services"}
@@ -58,34 +53,30 @@ const ServiceCategoriesHeader = () => {
 };
 
 const ServicesCategoriesCard = ({
-  esName,
+  id,
+  spName,
   enName,
-  spDesc,
-  enDesc,
-  image,
-}: ServicesCategoriesCardProps) => {
+  imgUrl,
+}: CategoriesType) => {
   const languageContext = useLanguageContext();
   return (
-    <Link href="/services">
+    <Link href={`/services/${id}`}>
     <div className="rounded-xl p-4 bg-gradient-to-r from-blue-500 to-cyan-500 overflow-hidden h-auto border-2 border-blue-900 cursor-pointer">
-      <div>
+      <div className="h-20">
         <h4 className="font-bold text-2xl text-blue-950 mb-2">
-          {languageContext?.language === "es" ? esName : enName}
+          {languageContext?.language === "es" ? spName : enName}
         </h4>
       </div>
-
-      <div className="h-20">
-        <p className="font-bold text-base text-blue-900">
-          {languageContext?.language === "es" ? spDesc : enDesc}
-        </p>
-      </div>
-      <div className="mt-4 h-60">
+      <div className="mt-4 h-80 md:h-96">
         <Image
+          src="https://images.pexels.com/photos/1058276/pexels-photo-1058276.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
           className="w-full h-auto h-full rounded-xl object-cover"
-          alt={esName}
-          src={image}
+          alt={languageContext?.language === "es" ? spName : enName}
           width={200}
           height={200}
+          onError={(e) => {
+            e.currentTarget.src = "/favicon-32x32.png";
+          }}
         />
       </div>
     </div>
@@ -94,13 +85,19 @@ const ServicesCategoriesCard = ({
 };
 
 const ServicesCategoriesList = () => {
+  const  firebaseContext = useFirebaseContext();
+
+  useEffect(() => {
+    firebaseContext?.getAllCategories();
+  }, []);
+
   return (
     <section className="py-16">
       <ServiceCategoriesHeader />
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
-        {CategoriesJson.map((card) => (
-          <div key={card.id}>
-            <ServicesCategoriesCard {...card} />
+        {firebaseContext?.categories.map((category) => (
+          <div key={category.id}>
+            <ServicesCategoriesCard {...category} />
           </div>
         ))}
       </div>

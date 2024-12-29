@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Birthstone } from "next/font/google";
 import Link from "next/link";
 import { Cog, XClose } from "@/components/svg/Icons";
@@ -18,9 +18,15 @@ const MainHeader = () => {
   
   const [showSideBar, setShowSideBar] = useState<boolean>(false);
 
-  const toggleSideBar = () => {
-    setShowSideBar(!showSideBar);
-    console.log("showSideBar", showSideBar);
+  useEffect(() => {
+    const currentLanguage =languageContext?.verifyLanguageFromLocalStorage();
+    languageContext?.setLanguage(currentLanguage);
+  }, []);
+
+  const handleLanguageChange = (lang: string) => {
+    const selectedLanguage = languageContext?.setLanguageAndLocalStorage(lang);
+    languageContext?.setLanguage(selectedLanguage);
+    setShowSideBar(false);
   };
   
   return (
@@ -39,8 +45,27 @@ const MainHeader = () => {
       {showSideBar && (
         <>
           <aside className="absolute right-0 top-0 w-10/12 md:w-3/6 bg-blue-950 h-screen z-30 transition-all ease-in-out p-4">
-            
+
             <XClose onClick={() => setShowSideBar(false)} />
+
+            <form>
+              <div className="flex flex-col">
+              <label
+                htmlFor="language"
+                className="text-base mb-1"
+              >
+                {languageContext?.language === "en" ? "Select Language" : "Seleccione Idioma"}
+              </label>
+              <select
+                onChange={(e) => handleLanguageChange(e.target.value)}
+                value={languageContext?.language}
+                className="w-fit rounded rounded-lg text-base md:text-xl font-bold text-blue-950"
+              >
+                <option value="en">English</option>
+                <option value="es">Español</option>
+              </select>
+              </div>
+            </form>
             
             <nav className="relative py-8">
               <ul>

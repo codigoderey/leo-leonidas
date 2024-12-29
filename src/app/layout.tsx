@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata } from "next";
 import { LanguageContextProvider } from "@/context/languageContext";
+import { FirebaseContextProvider } from "@/context/firebaseContext";
+import Head from "next/head";
 import MainHeader from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import Head from "next/head";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,7 +19,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Leonidas Services",
-  description: "Your all in one platform for design, printing and publishing, made in Puerto Rico",
+  description:
+    "Your all in one platform for design, printing and publishing, made in Puerto Rico",
 };
 
 export default function RootLayout({
@@ -26,23 +28,28 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
   return (
     <>
-    <Head>
-      <link rel="icon" href="/favicon.svg" />
-    </Head>
-    <html lang="en" className="bg-gray-900 text-gray-50">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <LanguageContextProvider>
-          <MainHeader />
-          {children}
-          <Footer />
-        </LanguageContextProvider>
-      </body>
-    </html>
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+        <link rel="manifest" href="/site.webmanifest"/>
+      </Head>
+      <html lang="en" className="bg-gray-900 text-gray-50">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <FirebaseContextProvider>
+            <LanguageContextProvider>
+              <MainHeader />
+              {children}
+              <Footer />
+            </LanguageContextProvider>
+          </FirebaseContextProvider>
+        </body>
+      </html>
     </>
   );
 }

@@ -22,12 +22,12 @@ const Jumbotron: React.FC = () => {
           {languageContext?.language === "en" ? (
             <JumbotronSpan
               classes="text-blue-950"
-              text="Design, Printing and Publishing"
+              text="Visual solutions for ads and signs"
             />
           ) : (
             <JumbotronSpan
               classes="text-blue-950"
-              text="Diseño, Impresión y Publicidad"
+              text="Soluciones visuales de anuncios y letreros"
             />
           )}
         </h1>

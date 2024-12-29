@@ -14,6 +14,7 @@ export const LanguageContextProvider = ({
   const setLanguageAndLocalStorage = (lang: string) => {
     setLanguage(lang);
     localStorage.setItem("language", lang);
+    return lang;
   };
 
   const verifyLanguageFromLocalStorage = () => {
@@ -22,6 +23,8 @@ export const LanguageContextProvider = ({
     if (storedLanguage) {
       setLanguage(storedLanguage);
       return storedLanguage;
+    } else {
+      setLanguageAndLocalStorage("es");
     }
 
     return "es";
