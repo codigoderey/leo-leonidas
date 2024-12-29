@@ -10,6 +10,7 @@ import { USFlag, PRFlag } from "@/components/svg/Icons";
 const birthstone = Birthstone({
   variable: "--font-birthstone",
   weight: "400",
+  subsets: ["latin"],
 });
 
 const MainHeader = () => {
