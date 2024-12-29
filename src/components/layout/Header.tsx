@@ -5,21 +5,20 @@ import { Birthstone } from "next/font/google";
 import Link from "next/link";
 import { Cog, XClose } from "@/components/svg/Icons";
 import { useLanguageContext } from "@/context/languageContext";
+import { USFlag, PRFlag } from "@/components/svg/Icons";
 
 const birthstone = Birthstone({
   variable: "--font-birthstone",
   weight: "400",
 });
 
-
 const MainHeader = () => {
-
   const languageContext = useLanguageContext();
-  
+
   const [showSideBar, setShowSideBar] = useState<boolean>(false);
 
   useEffect(() => {
-    const currentLanguage =languageContext?.verifyLanguageFromLocalStorage();
+    const currentLanguage = languageContext?.verifyLanguageFromLocalStorage();
     languageContext?.setLanguage(currentLanguage);
   }, []);
 
@@ -28,7 +27,7 @@ const MainHeader = () => {
     languageContext?.setLanguage(selectedLanguage);
     setShowSideBar(false);
   };
-  
+
   return (
     <header className="relative">
       <nav>
@@ -45,28 +44,37 @@ const MainHeader = () => {
       {showSideBar && (
         <>
           <aside className="absolute right-0 top-0 w-10/12 md:w-3/6 bg-blue-950 h-screen z-30 transition-all ease-in-out p-4">
-
             <XClose onClick={() => setShowSideBar(false)} />
 
             <form>
               <div className="flex flex-col">
-              <label
-                htmlFor="language"
-                className="text-base mb-1"
-              >
-                {languageContext?.language === "en" ? "Select Language" : "Seleccione Idioma"}
-              </label>
-              <select
-                onChange={(e) => handleLanguageChange(e.target.value)}
-                value={languageContext?.language}
-                className="w-fit rounded rounded-lg text-base md:text-xl font-bold text-blue-950"
-              >
-                <option value="en">English</option>
-                <option value="es">Español</option>
-              </select>
+                <label htmlFor="language" className="text-base mb-1">
+                  {languageContext?.language === "en"
+                    ? "Select Language"
+                    : "Seleccione Idioma"}
+                </label>
+                <div className="flex items-center">
+                  <select
+                    onChange={(e) => handleLanguageChange(e.target.value)}
+                    value={languageContext?.language}
+                    className="w-fit rounded rounded-lg text-base md:text-xl font-bold text-blue-950 cursor-pointer"
+                  >
+                    <option className="flex items-center cursor-pointer" value="en">
+                      English
+                    </option>
+                    <option className="flex items-center cursor-pointer" value="es">
+                      Español
+                    </option>
+                  </select>
+                  {languageContext?.language === "en" ? (
+                    <USFlag />
+                  ) : ( 
+                    <PRFlag />
+                  )}
+                </div>
               </div>
             </form>
-            
+
             <nav className="relative py-8">
               <ul>
                 <li className="mb-4">
@@ -82,7 +90,9 @@ const MainHeader = () => {
                     href="/"
                     className="text-2xl md:text-3xl font-bold text-blue-100 hover:text-blue-200 transition-all"
                   >
-                    {languageContext?.language === "en" ? "Get a quote" : "Obtener cotización"}
+                    {languageContext?.language === "en"
+                      ? "Get a quote"
+                      : "Obtener cotización"}
                   </Link>
                 </li>
                 <li className="mb-4">
@@ -90,7 +100,9 @@ const MainHeader = () => {
                     href="/"
                     className="text-2xl md:text-3xl font-bold text-blue-100 hover:text-blue-200 transition-all"
                   >
-                    {languageContext?.language === "en" ? "About" : "Sobre Nosotros"}
+                    {languageContext?.language === "en"
+                      ? "About"
+                      : "Sobre Nosotros"}
                   </Link>
                 </li>
                 <li className="mb-4">
@@ -98,13 +110,18 @@ const MainHeader = () => {
                     href="/"
                     className="text-2xl md:text-3xl font-bold text-blue-100 hover:text-blue-200 transition-all"
                   >
-                    {languageContext?.language === "en" ? "Contact" : "Contacto"}
+                    {languageContext?.language === "en"
+                      ? "Contact"
+                      : "Contacto"}
                   </Link>
                 </li>
               </ul>
             </nav>
           </aside>
-          <div onClick={() => setShowSideBar(false)} className="absolute right-0 top-0 w-screen bg-black/50 h-screen z-20 transition-all ease-in-out"/>
+          <div
+            onClick={() => setShowSideBar(false)}
+            className="absolute right-0 top-0 w-screen bg-black/50 h-screen z-20 transition-all ease-in-out"
+          />
         </>
       )}
     </header>
