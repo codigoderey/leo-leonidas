@@ -19,6 +19,8 @@ export const FirebaseContextProvider = ({
 
   const [category, setCategory] = useState<CategoriesType | null>(null);
 
+  const [loadingCategories, setLoadingCategories] = useState<boolean>(true)
+
   // get all categories from firebase
   const getAllCategories = async () => {
 
@@ -26,7 +28,7 @@ export const FirebaseContextProvider = ({
       const catRef = collection(db, "servicecategories");
 
       const catSnapshot = await getDocs(catRef);
-      
+
       const categoriesList = catSnapshot.docs.map((doc) => {
         const data  = doc.data();
         return {
@@ -36,11 +38,15 @@ export const FirebaseContextProvider = ({
           spDescription: data.spDescription,
           enDescription: data.enDescription,
           imgUrl: data.imgUrl
-        } 
-      }) 
+        }
+      })
 
       setCategories(categoriesList);
-      
+
+      if(categoriesList){
+        setLoadingCategories(false)
+      }
+
       return categoriesList;
     } catch (error) {
       console.error("Error getting documents: ", error);
@@ -53,13 +59,17 @@ export const FirebaseContextProvider = ({
 
     try {
       const categoryRef = doc(db, "servicecategories", id);
-      
+
       const categorySnapshot = await getDoc(categoryRef);
-      
+
       const data = categorySnapshot.data() as CategoriesType;
-      
+
       setCategory(data);
-      
+
+      if(data){
+        setLoadingCategories(false)
+      }
+
       return data;
     } catch (error) {
       console.error("Error getting document: ", error);
@@ -68,19 +78,19 @@ export const FirebaseContextProvider = ({
   }
 
   return (
-    <FirebaseContext.Provider
-      value={{
-        categories,
-        setCategories,
-        getAllCategories,
-        category,
-        setCategory,
-        getCategoryById
-      }}
-    >
-      {children}
-    </FirebaseContext.Provider>
-  );
+		<FirebaseContext.Provider
+			value={{
+				categories,
+				setCategories,
+				getAllCategories,
+				category,
+				setCategory,
+				getCategoryById,
+				loadingCategories
+			}}>
+			{children}
+		</FirebaseContext.Provider>
+	);
 };
 
 export const useFirebaseContext = () => {
