@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useFirebaseContext } from "@/context/firebaseContext";
+import { useStorageContext } from "@/context/storageContext";
 import { useLanguageContext } from "@/context/languageContext";
 import { useParams } from "next/navigation";
 import ServiceBanner from "@/components/ServiceBanner";
@@ -10,14 +10,14 @@ import Spinner from "@/components/Spinner";
 
 const ServicesPage = () => {
   const { id } = useParams();
-  const firebaseContext = useFirebaseContext();
+  const storageContext = useStorageContext();
   const languageContext = useLanguageContext();
 
   useEffect(() => {
-    firebaseContext?.getCategoryById(String(id));
+    storageContext?.getCategoryById(String(id));
   }, [id]);
 
-  if (firebaseContext?.loadingCategories) {
+  if (storageContext?.loadingCategories) {
     return <Spinner />;
   }
 
@@ -26,8 +26,8 @@ const ServicesPage = () => {
       <ServiceBanner
         category={
           languageContext?.language === "es"
-            ? firebaseContext?.category?.spName ?? ""
-            : firebaseContext?.category?.enName ?? ""
+            ? storageContext?.category?.spName ?? ""
+            : storageContext?.category?.enName ?? ""
         }
       />
 
@@ -35,13 +35,13 @@ const ServicesPage = () => {
         <section className="py-8 text-blue-200">
           <h2 className="text-2xl font-bold mb-8 text-center mx-auto">
             {languageContext?.language === "es"
-              ? `¿Qué son ${firebaseContext?.category?.spName.toLocaleLowerCase()}?`
-              : `What are ${firebaseContext?.category?.enName.toLocaleLowerCase()}?`}
+              ? `¿Qué son ${storageContext?.category?.spName.toLocaleLowerCase()}?`
+              : `What are ${storageContext?.category?.enName.toLocaleLowerCase()}?`}
           </h2>
           <p className="text-lg max-w-[80ch] mx-auto">
             {languageContext?.language === "es"
-              ? firebaseContext?.category?.spDescription
-              : firebaseContext?.category?.enDescription}
+              ? storageContext?.category?.spDescription
+              : storageContext?.category?.enDescription}
           </p>
         </section>
       </Container>

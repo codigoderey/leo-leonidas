@@ -1,15 +1,15 @@
 "use client";
 
 import React, { createContext, useState } from "react";
-import type { FirebaseContextType } from "@/types/contextTypes";
+import type { StorageContextType } from "@/types/contextTypes";
 import { CategoriesListType, CategoriesType } from "@/types/categories";
 
 import { db } from "@/config/firebase";
 import { collection, doc, getDocs, getDoc } from "firebase/firestore";
 
-export const FirebaseContext = createContext<FirebaseContextType | null>(null);
+export const StorageContext = createContext<StorageContextType | null>(null);
 
-export const FirebaseContextProvider = ({
+export const StorageContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
@@ -78,7 +78,7 @@ export const FirebaseContextProvider = ({
   }
 
   return (
-		<FirebaseContext.Provider
+		<StorageContext.Provider
 			value={{
 				categories,
 				setCategories,
@@ -86,17 +86,16 @@ export const FirebaseContextProvider = ({
 				category,
 				setCategory,
 				getCategoryById,
-				loadingCategories
-			}}>
+				loadingCategories			}}>
 			{children}
-		</FirebaseContext.Provider>
+		</StorageContext.Provider>
 	);
 };
 
-export const useFirebaseContext = () => {
-  const useFirebaseContext = React.useContext(FirebaseContext);
-  if (!useFirebaseContext) {
-    throw new Error("useFirebaseContext must be used within a FirebaseProvider");
+export const useStorageContext = () => {
+  const useStorageContext = React.useContext(StorageContext);
+  if (!useStorageContext) {
+    throw new Error("useStorageContext must be used within a FirebaseProvider");
   }
-  return useFirebaseContext;
+  return useStorageContext;
 };

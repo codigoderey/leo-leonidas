@@ -1,4 +1,6 @@
-import { CategoriesListType, CategoriesType } from "./categories";
+import { CategoriesListType, CategoriesType } from "@/types/categories";
+import { User } from "@/types/user";
+import type { UserCredential } from "firebase/auth";
 
 export interface LanguageContextType {
   language: string;
@@ -10,7 +12,7 @@ export interface LanguageContextType {
   setLanguageAndLocalStorage: (lang: string) => string;
 }
 
-export interface FirebaseContextType {
+export interface StorageContextType {
   categories: CategoriesListType;
 
   setCategories: React.Dispatch<React.SetStateAction<CategoriesListType>>;
@@ -24,4 +26,13 @@ export interface FirebaseContextType {
   setCategory: React.Dispatch<React.SetStateAction<CategoriesType | null>>;
 
   loadingCategories: boolean
+}
+
+export interface AuthContextType {
+	user: any | null;
+	createUser: (email: string, password: string) => Promise<UserCredential> | undefined;
+  signInUser: (email: string, password: string) => Promise<UserCredential> | undefined;
+  signOutUser: () => void;
+  persistUser: () => void;
+  authError: string | null;
 }

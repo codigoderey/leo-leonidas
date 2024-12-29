@@ -1,7 +1,7 @@
 "use client";
 
 import { useLanguageContext } from "@/context/languageContext";
-import { useFirebaseContext } from "@/context/firebaseContext";
+import { useStorageContext } from "@/context/storageContext";
 import type { CategoriesType } from "@/types/categories";
 import Image from "next/image";
 import Link from "next/link";
@@ -49,13 +49,13 @@ const ServicesCategoriesCard = ({
 };
 
 const ServicesCategoriesList = () => {
-	const firebaseContext = useFirebaseContext();
+	const storageContext = useStorageContext();
 
 	useEffect(() => {
-		firebaseContext?.getAllCategories();
+		storageContext?.getAllCategories();
 	}, []);
 
-  if(firebaseContext?.loadingCategories){
+  if(storageContext?.loadingCategories){
     return (
       <Spinner />
     )
@@ -65,7 +65,7 @@ const ServicesCategoriesList = () => {
 		<section className="py-16">
 			<ServiceCategoriesHeader />
 			<div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
-				{firebaseContext?.categories.map((category) => (
+				{storageContext?.categories.map((category) => (
 					<div key={category.id}>
 						<ServicesCategoriesCard {...category} />
 					</div>
