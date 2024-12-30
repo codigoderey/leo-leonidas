@@ -4,7 +4,7 @@ import MainContainer from "@/components/layout/Container";
 import Image from "next/image";
 import { useLanguageContext } from "@/context/languageContext";
 import AuthForm from "@/forms/AuthForm";
-export const RegisterPage = () => {
+const RegisterPage = () => {
 	const languageContext = useLanguageContext();
 
 	const onFormSubmit = () => {
