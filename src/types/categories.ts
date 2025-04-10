@@ -4,7 +4,7 @@ export interface CategoriesType {
   enName: string;
   spDescription: string;
   enDescription: string;
-  imgUrl: string;
+  imgUrl?: string;
 }
 
 export type CategoriesListType = CategoriesType[];

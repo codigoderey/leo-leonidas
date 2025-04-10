@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useLanguageContext } from "@/context/languageContext";
 import AuthForm from "@/forms/AuthForm";
 const RegisterPage = () => {
-	const languageContext = useLanguageContext();
+	const {language} = useLanguageContext();
 
 	const onFormSubmit = () => {
 		console.log("Form submitted");
@@ -18,7 +18,7 @@ const RegisterPage = () => {
 						<div className="mx-auto w-full max-w-sm lg:w-96">
 							<div>
 								<h2 className="mt-8 text-2xl/9 font-bold tracking-tight text-blue-200">
-									{languageContext?.language === "en"
+									{language === "en"
 										? "Sign in to your account"
 										: "Inicia sesión en tu cuenta"}
 								</h2>

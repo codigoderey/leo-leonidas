@@ -7,7 +7,6 @@ import { Cog, XClose } from "@/components/svg/Icons";
 import { useLanguageContext } from "@/context/languageContext";
 import { useAuthContext } from "@/context/authContext";
 import { USFlag, PRFlag } from "@/components/svg/Icons";
-import { auth } from "@/config/firebase";
 
 const birthstone = Birthstone({
 	variable: "--font-birthstone",
@@ -40,7 +39,10 @@ const MainHeader = () => {
 					<Link
 						href="/"
 						className={`${birthstone.className} text-5xl md:text-6xl font-bold text-blue-200 hover:text-blue-300 transition-all`}>
-						Leonidas
+						Familia Print{" "}
+						<span className="text-4xl text-white">
+							&nbsp; {languageContext.language === "en" ? "by" : "por"} Leónidas
+						</span>
 					</Link>
 					<Cog onClick={() => setShowSideBar(true)} />
 				</div>
@@ -52,14 +54,14 @@ const MainHeader = () => {
 						<form>
 							<div className="flex flex-col">
 								<label htmlFor="language" className="text-base mb-1">
-									{languageContext?.language === "en"
+									{languageContext.language === "en"
 										? "Select Language"
 										: "Seleccione Idioma"}
 								</label>
 								<div className="flex items-center">
 									<select
 										onChange={(e) => handleLanguageChange(e.target.value)}
-										value={languageContext?.language}
+										value={languageContext.language}
 										className="w-fit rounded rounded-lg text-base md:text-xl font-bold text-blue-950 cursor-pointer">
 										<option
 											className="flex items-center cursor-pointer"
@@ -72,7 +74,7 @@ const MainHeader = () => {
 											Español
 										</option>
 									</select>
-									{languageContext?.language === "en" ? <USFlag /> : <PRFlag />}
+									{languageContext.language === "en" ? <USFlag /> : <PRFlag />}
 								</div>
 							</div>
 						</form>
@@ -97,14 +99,14 @@ const MainHeader = () => {
 									<Link
 										href="/"
 										className="text-2xl md:text-3xl font-bold text-blue-100 hover:text-blue-200 transition-all">
-										{languageContext?.language === "en" ? "Home" : "Inicio"}
+										{languageContext.language === "en" ? "Home" : "Inicio"}
 									</Link>
 								</li>
 								<li className="mb-4">
 									<Link
 										href="/"
 										className="text-2xl md:text-3xl font-bold text-blue-100 hover:text-blue-200 transition-all">
-										{languageContext?.language === "en"
+										{languageContext.language === "en"
 											? "Get a quote"
 											: "Obtener cotización"}
 									</Link>
@@ -113,7 +115,7 @@ const MainHeader = () => {
 									<Link
 										href="/"
 										className="text-2xl md:text-3xl font-bold text-blue-100 hover:text-blue-200 transition-all">
-										{languageContext?.language === "en"
+										{languageContext.language === "en"
 											? "About"
 											: "Sobre Nosotros"}
 									</Link>
@@ -122,9 +124,7 @@ const MainHeader = () => {
 									<Link
 										href="/"
 										className="text-2xl md:text-3xl font-bold text-blue-100 hover:text-blue-200 transition-all">
-										{languageContext?.language === "en"
-											? "Contact"
-											: "Contacto"}
+										{languageContext.language === "en" ? "Contact" : "Contacto"}
 									</Link>
 								</li>
 							</ul>

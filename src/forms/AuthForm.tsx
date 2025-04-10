@@ -6,7 +6,7 @@ import Link from "next/link";
 import path from "path";
 
 const AuthForm = ({ onFormSubmit }: { onFormSubmit: () => void }) => {
-	const languageContext = useLanguageContext();
+	const {language} = useLanguageContext();
 	const pathname = usePathname();
 
 	return (
@@ -16,7 +16,7 @@ const AuthForm = ({ onFormSubmit }: { onFormSubmit: () => void }) => {
 					<label
 						htmlFor="displayName"
 						className="block text-sm/6 font-medium text-blue-200">
-						{languageContext?.language === "en"
+						{language === "en"
 							? "Full name"
 							: "Nombre completo"}
 					</label>
@@ -37,7 +37,7 @@ const AuthForm = ({ onFormSubmit }: { onFormSubmit: () => void }) => {
 				<label
 					htmlFor="email"
 					className="block text-sm/6 font-medium text-blue-200">
-					{languageContext?.language === "en"
+					{language === "en"
 						? "Email address"
 						: "Correo electrónico"}
 				</label>
@@ -57,7 +57,7 @@ const AuthForm = ({ onFormSubmit }: { onFormSubmit: () => void }) => {
 				<label
 					htmlFor="password"
 					className="block text-sm/6 font-medium text-blue-200">
-					{languageContext?.language === "en" ? "Password" : "Contraseña"}
+					{language === "en" ? "Password" : "Contraseña"}
 				</label>
 				<div className="mt-2">
 					<input
@@ -78,7 +78,7 @@ const AuthForm = ({ onFormSubmit }: { onFormSubmit: () => void }) => {
 							<Link
 								href="/forgot-password"
 								className="font-semibold text-blue-100 underline hover:text-blue-200 transition-colors">
-								{languageContext?.language === "en"
+								{language === "en"
 									? "Forgot your password?"
 									: "¿Olvidaste tu contraseña?"}
 							</Link>
@@ -87,7 +87,7 @@ const AuthForm = ({ onFormSubmit }: { onFormSubmit: () => void }) => {
 							<Link
 								href="/register"
 								className="font-semibold text-blue-100 underline hover:text-blue-200 transition-colors">
-								{languageContext?.language === "en"
+								{language === "en"
 									? "Create an account"
 									: "Crea una cuenta"}
 							</Link>
@@ -98,7 +98,7 @@ const AuthForm = ({ onFormSubmit }: { onFormSubmit: () => void }) => {
 						<Link
 							href="/login"
 							className="font-semibold text-blue-100 underline hover:text-blue-200 transition-colors">
-							{languageContext?.language === "en"
+							{language === "en"
 								? "I have an account"
 								: "Tengo una cuenta"}
 						</Link>
@@ -111,10 +111,10 @@ const AuthForm = ({ onFormSubmit }: { onFormSubmit: () => void }) => {
 					type="submit"
 					className="flex w-full justify-center rounded-md bg-white px-3 py-1.5 text-sm/6 text-blue-900 font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
 					{pathname === "/register"
-						? languageContext?.language === "en"
+						? language === "en"
 							? "Sign up"
 							: "Registrarse"
-						: languageContext?.language === "en"
+						: language === "en"
 						? "Sign in"
 						: "Iniciar sesión"}
 				</button>

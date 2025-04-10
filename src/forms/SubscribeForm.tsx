@@ -2,7 +2,7 @@ import React from "react";
 import { useLanguageContext } from "../context/languageContext";
 
 const SubscribeForm = () => {
-  const languageContext = useLanguageContext();
+  const {language} = useLanguageContext();
 
   return (
     <form className="w-full">
@@ -13,7 +13,7 @@ const SubscribeForm = () => {
 
     <div className="w-full mt-2">
       <button className="px-4 py-2 rounded-xl font-bold text-blue-100 cursor-pointer bg-blue-950 hover:bg-blue-900 transition-all">
-        {languageContext?.language === "en" ? "Subscribe" : "Suscribirse"}
+        {language === "en" ? "Subscribe" : "Suscribirse"}
       </button>
     </div>
   </form>

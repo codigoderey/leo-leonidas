@@ -5,7 +5,7 @@ import Image from "next/image";
 import SubscribeForm from "@/forms/SubscribeForm";
 
 const Jumbotron: React.FC = () => {
-  const languageContext = useLanguageContext();
+  const {language} = useLanguageContext();
 
   return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
@@ -19,7 +19,7 @@ const Jumbotron: React.FC = () => {
         />
 
         <h1 className="text-5xl md:text-6xl font-bold text-white z-10">
-          {languageContext?.language === "en" ? (
+          {language === "en" ? (
             <JumbotronSpan
               classes="text-blue-950"
               text="Visual solutions for ads and signs"
@@ -33,7 +33,7 @@ const Jumbotron: React.FC = () => {
         </h1>
 
         <h2 className="text-lg md:text-2xl font-bold text-white">
-          {languageContext?.language === "en" ? (
+          {language === "en" ? (
             <JumbotronSpan
               classes="text-blue-100 font-bold"
               text="Your all in one platform, made in Puerto Rico"
@@ -50,7 +50,7 @@ const Jumbotron: React.FC = () => {
       <div className="lg:col-span-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl px-4 py-4 md:py-8 xl:py-12 border border-blue-400 border-2 flex flex-col items-start justify-between">
         <div>
           <h3 className="text-2xl font-bold text-white">
-            {languageContext?.language === "en" ? (
+            {language === "en" ? (
               <JumbotronSpan
                 classes="text-blue-950 font-bold"
                 text="Subscribe to our newsletter"
@@ -64,7 +64,7 @@ const Jumbotron: React.FC = () => {
           </h3>
 
           <p>
-            {languageContext?.language === "en" ? (
+            {language === "en" ? (
               <JumbotronSpan
                 classes="text-blue-100 trcking-wide font-bold"
                 text="Get the latest updates and offers"
@@ -86,7 +86,7 @@ const Jumbotron: React.FC = () => {
 
           <div className="w-full mt-2">
             <button className="px-4 py-2 rounded-xl font-bold text-blue-100 cursor-pointer bg-blue-950 hover:bg-blue-900 transition-all">
-              {languageContext?.language === "en" ? "Subscribe" : "Suscribirse"}
+              {language === "en" ? "Subscribe" : "Suscribirse"}
             </button>
           </div>
         </form>

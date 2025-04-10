@@ -4,19 +4,19 @@ import MainContainer from "@/components/layout/Container";
 import { useLanguageContext } from "@/context/languageContext";
 
 const ForgotPasswordPage = () => {
-	const languageContext = useLanguageContext();
+	const {language} = useLanguageContext();
 
 	return (
 		<MainContainer>
 			<section className="py-32">
 				<div>
 					<h2 className="mt-8 text-2xl/9 font-bold tracking-tight text-blue-200">
-						{languageContext?.language === "en"
+						{language === "en"
 							? "Recover your password"
 							: "Recupera tu contraseña"}
 					</h2>
           <p className="my-4 text-lg text-blue-100">
-            {languageContext?.language === "en"
+            {language === "en"
               ? "Enter your email address and if you have an account, we'll send you a link to reset your password."
               : "Ingrese su dirección de correo electrónico y si tiene una cuenta, le enviaremos un enlace para restablecer su contraseña."}
           </p>
@@ -26,7 +26,7 @@ const ForgotPasswordPage = () => {
 						<label
 							htmlFor="email"
 							className="block text-sm/6 font-medium text-blue-200">
-							{languageContext?.language === "en"
+							{language === "en"
 								? "Email"
 								: "Correo electrónico"}
 						</label>
