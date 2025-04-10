@@ -19,9 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Leonidas Services",
-  description:
-    "Your all in one platform for design, printing and publishing, made in Puerto Rico",
+  title: "Familia Print by Leonidas",
 };
 
 export default function RootLayout({
