@@ -7,6 +7,7 @@ import { Cog, XClose } from "@/components/svg/Icons";
 import { useLanguageContext } from "@/context/languageContext";
 import { useAuthContext } from "@/context/authContext";
 import { USFlag, PRFlag } from "@/components/svg/Icons";
+import Image from "next/image";
 
 const birthstone = Birthstone({
 	variable: "--font-birthstone",
@@ -35,12 +36,18 @@ const MainHeader = () => {
 	return (
 		<header className="relative">
 			<nav>
-				<div className="flex justify-between items-center px-4 pb-4 pt-8">
+				<div className="flex justify-between items-start px-4 pb-4 pt-8">
 					<Link
 						href="/"
 						className={`${birthstone.className} text-5xl md:text-6xl font-bold text-blue-200 hover:text-blue-300 transition-all`}>
-						Familia Print{" "}
-						<span className="text-4xl text-white">
+						<Image
+							width={300}
+							height={100}
+							src="/logos/horizontal-gradient.svg"
+							alt="Familia Print by Leonidas"
+              className="inline-block relative"
+						/>
+						<span className="text-4xl text-white inline-block absolute bottom-[.555rem]">
 							&nbsp; {languageContext.language === "en" ? "by" : "por"} Leónidas
 						</span>
 					</Link>
@@ -83,36 +90,41 @@ const MainHeader = () => {
 								<li className="mb-4">
 									{authContext?.user ? (
 										<Link
+											onClick={() => setShowSideBar(false)}
 											className="text-2xl md:text-3xl font-bold text-blue-100 hover:text-blue-200 transition-all"
 											href="/admin">
 											User
 										</Link>
 									) : (
 										<Link
+                      onClick={() => setShowSideBar(false)}
 											className="text-2xl md:text-3xl font-bold text-blue-100 hover:text-blue-200 transition-all"
 											href="/login">
 											Login
 										</Link>
 									)}
 								</li>
-								<li className="mb-4">
+								{/* <li className="mb-4">
 									<Link
+										onClick={() => setShowSideBar(false)}
 										href="/"
 										className="text-2xl md:text-3xl font-bold text-blue-100 hover:text-blue-200 transition-all">
 										{languageContext.language === "en" ? "Home" : "Inicio"}
 									</Link>
-								</li>
+								</li> */}
 								<li className="mb-4">
 									<Link
+										onClick={() => setShowSideBar(false)}
 										href="/"
 										className="text-2xl md:text-3xl font-bold text-blue-100 hover:text-blue-200 transition-all">
 										{languageContext.language === "en"
 											? "Get a quote"
-											: "Obtener cotización"}
+											: "Solicitar cotización"}
 									</Link>
 								</li>
 								<li className="mb-4">
 									<Link
+										onClick={() => setShowSideBar(false)}
 										href="/"
 										className="text-2xl md:text-3xl font-bold text-blue-100 hover:text-blue-200 transition-all">
 										{languageContext.language === "en"
@@ -120,13 +132,14 @@ const MainHeader = () => {
 											: "Sobre Nosotros"}
 									</Link>
 								</li>
-								<li className="mb-4">
+								{/* <li className="mb-4">
 									<Link
+                    onClick={() => setShowSideBar(false)}
 										href="/"
 										className="text-2xl md:text-3xl font-bold text-blue-100 hover:text-blue-200 transition-all">
 										{languageContext.language === "en" ? "Contact" : "Contacto"}
 									</Link>
-								</li>
+								</li> */}
 							</ul>
 						</nav>
 					</aside>
